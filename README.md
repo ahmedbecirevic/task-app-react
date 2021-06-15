@@ -1,1 +1,2 @@
-#Simple app in react for practice
+# Tasks App
+Simple app in React.js for practice
