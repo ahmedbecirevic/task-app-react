@@ -26,6 +26,7 @@ const TASKS_ARRAY = [
 
 export const ShowFormContext = React.createContext({
   showAddForm: () => {},
+  openToggle: false,
 });
 
 const App = () => {
@@ -62,7 +63,7 @@ const App = () => {
   return (
     <div className='container'>
       <ShowFormContext.Provider value={{ showAddForm: showAddFormHandler }}>
-        <Header title='Tasks App' />
+        <Header title='Tasks App' buttonTextToggle={showForm} />
       </ShowFormContext.Provider>
       {showForm && <AddTask onAddTask={addTaskHandler} />}
       {tasks.length > 0 ? (
