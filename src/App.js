@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Tasks from './components/Tasks';
-import { useState } from 'react';
+import AddTask from './components/AddTask';
+import React, { useState } from 'react';
 
 const TASKS_ARRAY = [
   {
@@ -23,13 +24,56 @@ const TASKS_ARRAY = [
   },
 ];
 
+export const ShowFormContext = React.createContext({
+  showAddForm: () => {},
+});
+
 const App = () => {
   const [tasks, setTasks] = useState(TASKS_ARRAY);
+  const [showForm, setShowForm] = useState(false);
+
+  const showAddFormHandler = () => {
+    setShowForm(prevValue => !prevValue);
+  };
+
+  const addTaskHandler = task => {
+    const id = Math.floor(Math.random() * 10000) + 1;
+    const newTask = { id, ...task };
+    setTasks(prevTasks => {
+      return [newTask, ...prevTasks];
+    });
+  };
+
+  const deleteTaskHandler = id => {
+    setTasks(prevTasks => {
+      const tempTasks = prevTasks.filter(task => task.id !== id);
+      return tempTasks;
+    });
+  };
+
+  const toggleReminderHandler = id => {
+    setTasks(prevTasks => {
+      return prevTasks.map(task =>
+        task.id === id ? { ...task, reminder: !task.reminder } : task
+      );
+    });
+  };
 
   return (
     <div className='container'>
-      <Header title='Tasks App' />
-      <Tasks items={tasks}></Tasks>
+      <ShowFormContext.Provider value={{ showAddForm: showAddFormHandler }}>
+        <Header title='Tasks App' />
+      </ShowFormContext.Provider>
+      {showForm && <AddTask onAddTask={addTaskHandler} />}
+      {tasks.length > 0 ? (
+        <Tasks
+          items={tasks}
+          onDelete={deleteTaskHandler}
+          onToggle={toggleReminderHandler}
+        />
+      ) : (
+        <p>No tasks available</p>
+      )}
     </div>
   );
 };

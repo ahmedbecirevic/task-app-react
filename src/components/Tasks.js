@@ -1,10 +1,15 @@
-import { useState } from 'react';
+import Task from './Task';
 
-const Tasks = ({ items }) => {
+const Tasks = ({ items, onDelete, onToggle }) => {
   return (
     <>
       {items.map(task => (
-        <h3 key={task.id}>{task.text}</h3>
+        <Task
+          key={task.id}
+          task={task}
+          onDelete={onDelete}
+          onToggle={onToggle}
+        />
       ))}
     </>
   );
