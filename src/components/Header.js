@@ -3,26 +3,31 @@ import Button from './Button';
 
 
 const Header = ({ title }) => {
-   const onClick = () => (console.log('click'))
-   return (
-      <header className='header'>
-         <h1>{title}</h1>
-         <Button className='btn' color='green' text='press me' onClick={onClick}></Button>
-      </header>
-   )
-}
+  const clickHandler = () => console.log('click');
+  return (
+    <header className='header'>
+      <h1>{title}</h1>
+      <Button
+        className='btn'
+        color='green'
+        text='Add'
+        onClick={clickHandler}
+      ></Button>
+    </header>
+  );
+};
 
 Header.defaultProps = {
-   title: 'Task Tracker App',
-}
+  title: 'Task Tracker App',
+};
 
 Header.propTypes = {
-   title: PropTypes.string,
-}
+  title: PropTypes.string,
+};
 
 // const headingStyle = {
-//    color: 'red', 
+//    color: 'red',
 //    backgroundColor: 'black'
 // }
 
-export default Header
+export default Header;

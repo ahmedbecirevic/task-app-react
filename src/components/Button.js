@@ -8,14 +8,14 @@ const Button = ({ color, text, onClick }) => {
 }
 
 Button.defaultProps = {
-   color: 'navy',
-   text: 'add',
-}
+  color: 'navy',
+  text: 'Button',
+};
 
 Button.propTypes = {
-   text: PropTypes.string,
-   color: PropTypes.string,
-   onClick: PropTypes.func,
-}
+  text: PropTypes.string,
+  color: PropTypes.string,
+  onClick: PropTypes.func,
+};
 
-export default Button
+export default Button;
